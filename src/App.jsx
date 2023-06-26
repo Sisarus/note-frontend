@@ -28,6 +28,7 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
+      console.log('here ', user)
       noteService.setToken(user.token)
     }
   }, [])
@@ -41,7 +42,9 @@ const App = () => {
       noteService.setToken(user.token)
       window.localStorage.setItem(
         'loggedNoteappUser', JSON.stringify(user)
-      ) 
+      )
+
+      console.log('here ', user)
       setUser(user)
       setUsername('')
       setPassword('')
@@ -129,6 +132,11 @@ const App = () => {
     </form>  
   )
 
+  const handleLogout = () => {
+    window.localStorage.removeItem('loggedNoteappUser')
+    setUser()
+  }
+
   return (
     <div>
       <h1>Notes app</h1>
@@ -137,7 +145,8 @@ const App = () => {
       {!user && loginForm()} 
       {user && <div>
         <p>{user.name} logged in</p>
-          {noteForm()}
+        <button onClick={handleLogout}>Logout</button>
+        {noteForm()}
         </div>
       } 
  

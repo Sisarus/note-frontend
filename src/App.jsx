@@ -34,7 +34,7 @@ const App = () => {
     }
   }, [])
 
-  const handleLogin = async ({username, password}) => {
+  const handleLogin = async ({ username, password }) => {
     try {
       const user = await loginService.login({
         username, password
@@ -42,7 +42,7 @@ const App = () => {
       noteService.setToken(user.token)
       window.localStorage.setItem(
         'loggedNoteappUser', JSON.stringify(user)
-      ) 
+      )
       setUser(user)
     } catch (exception) {
       setErrorMessage('wrong credentials')
@@ -56,7 +56,7 @@ const App = () => {
     noteFormRef.current.toggleVisibility()
     noteService
       .create(noteObject)
-        .then(returnedNote => {
+      .then(returnedNote => {
         setNotes(notes.concat(returnedNote))
       })
   }
@@ -66,24 +66,23 @@ const App = () => {
     : notes.filter(note => note.important)
 
   const toggleImportanceOf = id => {
-      const note = notes.find(n => n.id === id)
-      const changedNote = { ...note, important: !note.important }
-  
-      noteService
-        .update(id, changedNote).then(returnedNote => {
-          setNotes(notes.map(note => note.id !== id ? note : returnedNote))
-        })
-        .catch(error => {
-          setErrorMessage(
-            `Note '${note.content}' was already removed from server`
-          )
-          setTimeout(() => {
-            setErrorMessage(null)
-          }, 5000)
-          setNotes(notes.filter(n => n.id !== id))
-        })
-   }
-  
+    const note = notes.find(n => n.id === id)
+    const changedNote = { ...note, important: !note.important }
+
+    noteService
+      .update(id, changedNote).then(returnedNote => {
+        setNotes(notes.map(note => note.id !== id ? note : returnedNote))
+      })
+      .catch( () => {
+        setErrorMessage( `Note '${note.content}' was already removed from server`
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+        setNotes(notes.filter(n => n.id !== id))
+      })
+  }
+
   return (
     <div>
       <h1>Notes app</h1>
@@ -102,15 +101,15 @@ const App = () => {
           </Togglable>
         </div>
       }
- 
+
       <div>
         <button onClick={() => setShowAll(!showAll)}>
           show {showAll ? 'important' : 'all' }
         </button>
-      </div> 
+      </div>
       <ul>
         <ul>
-          {notesToShow.map(note => 
+          {notesToShow.map(note =>
             <Note
               key={note.id}
               note={note}

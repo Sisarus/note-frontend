@@ -13,3 +13,8 @@ JSON Server taas asennettiin sovelluskehityksen aikaiseksi riippuvuudeks
 npm install json-server --save-dev
 
 "server": "json-server -p3001 --watch db.json"
+
+
+npm test -- --coverage --collectCoverageFrom='src/**/*.{jsx,js}'
+
+

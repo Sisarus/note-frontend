@@ -1,4 +1,3 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import NoteForm from './NoteForm'
@@ -10,7 +9,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', async () => {
 
   render(<NoteForm createNote={createNote} />)
 
-  const input = screen.getByRole('textbox')
+  const input = screen.getByPlaceholderText('write note content here')
   const sendButton = screen.getByText('save')
 
   await user.type(input, 'testing a form...')

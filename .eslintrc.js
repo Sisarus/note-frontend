@@ -1,32 +1,34 @@
 module.exports = {
-  "env": {
+    root: true,
+    env: {
       "browser": true,
       "es6": true,
-      "jest/globals": true 
+      "jest/globals": true,
+      "cypress/globals": true
   },
-  "extends": [ 
-      "eslint:recommended",
-      "plugin:react/recommended"
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
   ],
-  "parserOptions": {
+  parserOptions: {
       "ecmaFeatures": {
           "jsx": true
       },
       "ecmaVersion": 2018,
       "sourceType": "module"
   },
-  "plugins": [
-      "react", "jest"
+  plugins: [
+    "react", "jest", "cypress"
   ],
-  "rules": {
+  rules: {
       "indent": [
           "error",
           2  
       ],
-      "linebreak-style": [
-          "error",
-          'windows'
-      ],
+      "linebreak-style": 0
+      ,
       "quotes": [
           "error",
           "single"
@@ -47,7 +49,7 @@ module.exports = {
       "react/prop-types": 0,
       "react/react-in-jsx-scope": "off"
   },
-  "settings": {
+  settings: {
     "react": {
       "version": "detect"
     }
